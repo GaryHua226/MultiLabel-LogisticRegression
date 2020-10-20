@@ -90,7 +90,7 @@ def SGD(beta, train_X, train_y):
     :return: beta更新后的值
     '''
     alpha = 0.01 # learning rate
-    iterations = 100 # 迭代100次计算
+    iterations = 1 # 迭代100次计算
 
     for i in range(0, iterations):
         betax = []
@@ -167,6 +167,10 @@ if __name__ == '__main__':
         FN = 0
         for j in range(len(test_y)):
             tmp = clfs[i].predict(test_X[j])
+            if tmp >= 0.5:
+                tmp = 1
+            else:
+                tmp = 0
             if tmp == 1 and test_y[j] == i+1:
                 TP += 1
             elif tmp == 1 and test_y[j] != i+1:
