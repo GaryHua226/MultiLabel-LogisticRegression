@@ -154,6 +154,9 @@ if __name__ == '__main__':
     FPList=[]
     TNList=[]
     FNList=[]
+    precisionList = []
+    recallList = []
+    F1List = []
 
     for i in range(CLASSNUM):
         # 对每一类去计算各个评价指标值
@@ -175,6 +178,9 @@ if __name__ == '__main__':
         FPList.append(FP)
         TNList.append(TN)
         FNList.append(FN)
+        precisionList.append(get_precision(TP, FP))
+        recallList.append(get_recall(TP, FN))
+        F1List.append(get_F1(precisionList[i], recallList[i]))
 
 
     # micro是用总的TP,FP,TN,FN求指标
