@@ -92,17 +92,19 @@ def SGD(beta, train_X, train_y):
 
     for i in range(0, iterations):
         betax = []
+        ebetax = []
         for j in range(0, len(train_X)):
             val = 0
             for k in range(len(train_X[0])):
                 val += beta[k] * train_X[j][k]
             betax.append(val)
+            ebetax.append(np.exp(val))
 
         gradient = [] # 计算每一个分量的梯度
         for j in range(len(beta)):
             ith_gradient = 0
             for k in range(len(train_X)):
-                ith_gradient = ith_gradient - train_y[k] * train_X[k][j] + np.exp(betax[k]) * train_X[k][j] / (1 + np.exp(betax[k]))
+                ith_gradient = ith_gradient - train_y[k] * train_X[k][j] + ebetax[k] * train_X[k][j] / (1 + ebetax[k])
             ith_gradient = ith_gradient / len(train_X)
             gradient.append(ith_gradient)
 
