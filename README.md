@@ -1,1 +1,1 @@
-# MultiLabel-LinearRegression
+# MultiLabel-LogisticRegression
