@@ -162,7 +162,7 @@ if __name__ == '__main__':
         TN = 0
         FN = 0
         for j in range(len(test_y)):
-            tmp = clfs[i].predict([test_X[j]])
+            tmp = clfs[i].predict(test_X[j])
             if tmp == 1 and test_y[j] == i+1:
                 TP += 1
             elif tmp == 1 and test_y[j] != i+1:
