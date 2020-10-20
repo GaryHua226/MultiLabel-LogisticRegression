@@ -1,4 +1,5 @@
 import numpy as np
+import joblib
 
 def get_train_data():
     train_X = np.loadtxt(open('ML2020-PS2-dataset/train_set.csv','rb'),delimiter=",",skiprows=1,usecols=range(0,16))
@@ -105,6 +106,7 @@ def SGD(beta, train_X, train_y):
             ith_gradient = 0 # 一阶导
             for k in range(len(train_X)):
                 ith_gradient = ith_gradient - train_y[k] * train_X[k][j] + ebetax[k] * train_X[k][j] / (1 + ebetax[k])
+            ith_gradient = ith_gradient / len(train_X)
             gradient.append(ith_gradient)
 
         # 更新每一个beta的值
@@ -128,6 +130,8 @@ if __name__ == '__main__':
         # 训练26个分类器
         clfs.append(LR_clf(i+1))
         clfs[i].fit(train_X.copy(), train_y.copy())
+
+    joblib.dump(clfs, 'LR_model.pkl')
 
     # 对测试集进行预测
     predicted_y = []

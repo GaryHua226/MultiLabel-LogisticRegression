@@ -1,4 +1,5 @@
 import numpy as np
+import joblib
 
 def get_train_data():
     train_X = np.loadtxt(open('ML2020-PS2-dataset/train_set.csv','rb'),delimiter=",",skiprows=1,usecols=range(0,16))
@@ -132,6 +133,8 @@ if __name__ == '__main__':
         clfs.append(LR_clf(i+1))
         clfs[i].fit(train_X.copy(), train_y.copy())
 
+    joblib.dump(clfs, 'LR_2.pkl')
+
     # 对测试集进行预测
     predicted_y = []
     for X in test_X:
@@ -179,6 +182,7 @@ if __name__ == '__main__':
     # macro是对各个分类器的指标求平均
 
     accuracy=get_accuracy(predicted_y, test_y)
+    print(accuracy)
     microPrecision=get_microPrecision(TPList, FPList)
     microRecall=get_microRecall(TPList, FNList)
     microF1=get_microF1(microPrecision, microRecall)
