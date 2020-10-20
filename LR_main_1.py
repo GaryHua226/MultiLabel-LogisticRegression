@@ -1,5 +1,6 @@
 import numpy as np
 import joblib
+from numpy import mean
 
 def get_train_data():
     train_X = np.loadtxt(open('ML2020-PS2-dataset/train_set.csv','rb'),delimiter=",",skiprows=1,usecols=range(0,16))
