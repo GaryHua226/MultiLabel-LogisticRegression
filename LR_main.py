@@ -88,7 +88,7 @@ def SGD(beta, train_X, train_y):
     :return: beta更新后的值
     '''
     alpha = 0.01 # learning rate
-    iterations = 100 # 迭代300次计算
+    iterations = 100 # 迭代100次计算
 
     for i in range(0, iterations):
         betax = []
@@ -102,10 +102,12 @@ def SGD(beta, train_X, train_y):
 
         gradient = [] # 计算每一个分量的梯度
         for j in range(len(beta)):
-            ith_gradient = 0
+            ith_gradient = 0 # 一阶导
+            ith_gradient_2 = 0 # 二阶导
             for k in range(len(train_X)):
                 ith_gradient = ith_gradient - train_y[k] * train_X[k][j] + ebetax[k] * train_X[k][j] / (1 + ebetax[k])
-            ith_gradient = ith_gradient / len(train_X)
+                ith_gradient_2 = ith_gradient_2 + ebetax[k] * train_X[k][j] / ((1 + ebetax[k])**2)
+            ith_gradient = ith_gradient / (ith_gradient_2**2) #一阶导除以二阶导的平方
             gradient.append(ith_gradient)
 
         # 更新每一个beta的值
