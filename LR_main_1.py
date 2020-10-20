@@ -162,13 +162,14 @@ if __name__ == '__main__':
         TN = 0
         FN = 0
         for j in range(len(test_y)):
-            if predicted_y[j] == i+1 and test_y[j] == i+1:
+            tmp = clfs[i].predict([test_X[j]])
+            if tmp == 1 and test_y[j] == i+1:
                 TP += 1
-            elif predicted_y[j] == i+1 and test_y[j] != i+1:
+            elif tmp == 1 and test_y[j] != i+1:
                 FP += 1
-            elif predicted_y[j] != i+1 and test_y[j] == i+1:
+            elif tmp != 1 and test_y[j] == i+1:
                 FN += 1
-            elif predicted_y[j] != i+1 and test_y[j] != i+1:
+            elif tmp != 1 and test_y[j] != i+1:
                 TN += 1
         TPList.append(TP)
         FPList.append(FP)
